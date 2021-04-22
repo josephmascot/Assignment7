@@ -1,0 +1,76 @@
+import awoc
+world = awoc.AWOC()
+africa=world.get_countries_list_of('Africa') #getting African countries
+
+# get student details
+def student_data():
+  student_data.firstname= input("Enter Student's First Name: ")
+  student_data.lastname =  input("Enter Student's Last Name: ")
+  student_data.gender = input("Enter Student's Gender: ")
+  student_data.student_id = input("Enter Student's ID: ")
+  student_data.student_email = input("Enter Student email address: ")
+  student_data.phone= input("Students phone Number: ")
+  student_data.country= input("Enter country of origin: ")
+  student_data.city = input("Enter city: ")
+  student_data.mailing_address= input("Enter mailing Address: ")
+  
+# calculate student scores
+def average_scores():
+  average_scores.scores=[] 
+  for quiz in range(1,4):
+    quiz_score = int(input(f"Enter Quiz {quiz} scores: "))
+    average_scores.scores.append(quiz_score)
+  for test in range(1,3):
+    test_score= int(input(f"Enter Test {test} scores: "))
+    average_scores.scores.append(test_score)  
+  average_scores.assignment=int(input("The student did how many programming assignments? "))
+  average_scores.zoomcall_attendance=int(input("How many Zoom meeting did the student attend? "))
+  total_scores=sum(average_scores.scores)
+  Total_exams=len(average_scores.scores)
+  average_scores.average=total_scores/Total_exams
+  return average_scores.average
+
+# check if student met minimum requiremnt
+def scholarship_qualification_check():
+  status=" "
+  if student_data.country.title() in africa:
+    if student_data.gender.lower() == "male":
+      if average_scores.average>=80 and average_scores.assignment>=10 and  average_scores.zoomcall_attendance==3:
+        scholarship_qualification_check.status = (f"{student_data.firstname.title()} has met the minimum criteria for the scholarship qualification")
+      else:
+        scholarship_qualification_check.status= ("Student does not meet minimum requirement for the scholarship award.")
+    elif student_data.gender.lower() == "female":
+      if average_scores.average>=76 and average_scores.assignment>=10 and  average_scores.zoomcall_attendance>=3:
+        scholarship_qualification_check.status = (f"{student_data.firstname.title()} has met the minimum criteria for the scholarship qualification")
+      else:
+        scholarship_qualification_check.status = (f"{student_data.firstname.title()} does not meet minimum requirement for the scholarship award.")
+  else:
+    scholarship_qualification_check.status=f"{student_data.firstname.title()} is not African, hence doesn't qualify for this scholarship!"
+  return scholarship_qualification_check.status
+# Main
+def scholarships_award():
+  student_data()
+  average_scores()
+  scholarship_qualification_check()
+  print(" ")
+  print("SCHOLARSHIP AWARD FEEDBACK".center(60,"="))
+  print(" ")
+  print(f"Section A: Student BioData".center(60, "="))
+  print(f"Student Fullname: {student_data.firstname.title()} {student_data.lastname.title()}")
+  print(f"Gender: {student_data.gender}")
+  print(f"Student ID Number: {student_data.student_id}")
+  print(f"Email Address: {student_data.student_email}")
+  print(f"Phone Number: {student_data.phone}")
+  print(f"Place of Origin: {student_data.city.title()},{student_data.country.title()}")
+  print(f"Mailing address: {student_data.mailing_address}")
+  print(" ")
+  print(f"Section B: Scores".center(60, "="))
+  print(f"Average Scores: {average_scores.average}%")
+  print(f"Zoom Meeting Score: {average_scores.zoomcall_attendance*3}")
+  print(f"Programming Assignment score: {average_scores.assignment} Points")
+  print(" ")
+  print(f"Section C: Status".center(60, "="))
+  print(f"Status: {scholarship_qualification_check.status}")
+
+scholarships_award()
+
